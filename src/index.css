@@ -1,0 +1,12 @@
+.container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 10%;
+  align-items: center;
+}
+img {
+  height: 27px;
+  width: 27px;
+}
