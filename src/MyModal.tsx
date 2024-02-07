@@ -3,30 +3,62 @@ import {
   Button,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-const MyModal = ({ isOpen, onClose }) => {
+const schema = z.object({
+  description: z
+    .string()
+    .min(10, { message: 'Note should be atleast 10 characters' }),
+});
+
+type MyModalData = z.infer<typeof schema>;
+
+interface Props {
+  onClose: () => void;
+  onSubmit: (data: MyModalData) => void;
+  isOpen: boolean;
+}
+
+const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<MyModalData>({
+    resolver: zodResolver(schema),
+  });
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
           <ModalBody>
-            {/* Modal Content */}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <textarea
+                {...register('description')}
+                className='description'
+                id='description'
+              />
+              {errors && (
+                <p className='danger'>{errors.description?.message}</p>
+              )}
+              <Button
+                className='add-btn'
+                colorScheme='purple'
+                // onClick={onClose}
+                type='submit'
+              >
+                Add note
+              </Button>
+              <Button className='close-btn' colorScheme='red' onClick={onClose}>
+                Close
+              </Button>
+            </form>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
