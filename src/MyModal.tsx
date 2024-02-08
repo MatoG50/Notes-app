@@ -27,6 +27,7 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<MyModalData>({
     resolver: zodResolver(schema),
@@ -37,24 +38,32 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
         <ModalOverlay />
         <ModalContent>
           <ModalBody>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <textarea
-                {...register('description')}
-                className='description'
-                id='description'
-              />
+            <form
+              onSubmit={handleSubmit(data => {
+                onSubmit(data);
+                reset();
+              })}
+            >
+              <textarea {...register('description')} className='description' />
               {errors && (
                 <p className='danger'>{errors.description?.message}</p>
               )}
               <Button
                 className='add-btn'
                 colorScheme='purple'
-                // onClick={onClose}
+                onClick={onClose}
                 type='submit'
               >
                 Add note
               </Button>
-              <Button className='close-btn' colorScheme='red' onClick={onClose}>
+              <Button
+                className='close-btn'
+                colorScheme='red'
+                onClick={() => {
+                  onClose();
+                  reset();
+                }}
+              >
                 Close
               </Button>
             </form>
