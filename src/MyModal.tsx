@@ -12,6 +12,7 @@ import { z } from 'zod';
 const schema = z.object({
   description: z
     .string()
+    .trim()
     .min(10, { message: 'Note should be atleast 10 characters' })
     .max(70),
 });
