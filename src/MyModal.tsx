@@ -29,7 +29,7 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<MyModalData>({
     resolver: zodResolver(schema),
   });
@@ -45,12 +45,17 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
                 reset();
               })}
             >
-              <textarea {...register('description')} className='description' />
+              <textarea
+                {...register('description')}
+                className='description'
+                disabled={isSubmitting}
+              />
               {errors && (
                 <p className='danger'>{errors.description?.message}</p>
               )}
               <Button
                 className='add-btn'
+                disabled={isSubmitting}
                 colorScheme='purple'
                 onClick={onClose}
                 type='submit'

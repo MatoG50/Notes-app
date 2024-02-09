@@ -41,7 +41,11 @@ function App() {
         <Text fontSize='4xl' fontWeight='bold'>
           Notes
         </Text>
-        <img src='./src/assets/add_icon.svg' alt='image' onClick={onOpen} />
+        <div className='circle' onClick={onOpen}>
+          <p className='plus'>+</p>
+        </div>
+
+        {/* <img src='./src/assets/add_icon.svg' alt='image' onClick={onOpen} /> */}
       </div>
       <div className='cards'>
         <NoteCard notes={notes} />
