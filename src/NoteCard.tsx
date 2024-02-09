@@ -1,23 +1,18 @@
-import { Card, CardFooter, CardHeader, Text } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Text } from '@chakra-ui/react';
 
 interface Note {
   id: number;
   description: string;
+  date: string;
+  backgroundColor: string;
 }
 
 interface Props {
   notes: Note[];
 }
-const NoteCard = ({ notes }: Props) => {
-  const currentDate = new Date('2024-02-05');
 
+const NoteCard = ({ notes }: Props) => {
   // Random background color
-  const generateColor = () => {
-    const CHHAPOLA = Math.floor(Math.random() * 16777215)
-      .toString(16)
-      .padStart(6, '0');
-    return `#${CHHAPOLA}`;
-  };
 
   return (
     <>
@@ -25,13 +20,13 @@ const NoteCard = ({ notes }: Props) => {
         <Card
           className='card'
           key={note.id}
-          style={{ backgroundColor: generateColor() }}
+          style={{ backgroundColor: note.backgroundColor }}
         >
-          <CardHeader>
+          <CardBody>
             <Text className='txt'>{note.description}</Text>
-          </CardHeader>
-          <CardFooter>
-            <Text className='txt'>{currentDate.toLocaleString()}</Text>
+          </CardBody>
+          <CardFooter className='footer'>
+            <Text className='txt'>{note.date}</Text>
           </CardFooter>
         </Card>
       ))}

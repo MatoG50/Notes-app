@@ -31,8 +31,8 @@ img {
 .cards {
   display: flex;
   align-items: center;
+  justify-content: left;
   flex-wrap: wrap;
-  justify-content: center;
   /* text-wrap: wrap; */
 }
 
@@ -53,6 +53,17 @@ img {
 .danger {
   color: red;
 }
-.txt {
+/* .txt {
   color: white;
+} */
+/* .footer {
+  margin-top: 70px;
+} */
+
+/* Media query */
+@media only screen and (max-width: 767px) {
+  /* Styles for small screens */
+  .cards {
+    justify-content: space-evenly;
+  }
 }

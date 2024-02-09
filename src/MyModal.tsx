@@ -12,7 +12,8 @@ import { z } from 'zod';
 const schema = z.object({
   description: z
     .string()
-    .min(10, { message: 'Note should be atleast 10 characters' }),
+    .min(10, { message: 'Note should be atleast 10 characters' })
+    .max(70),
 });
 
 type MyModalData = z.infer<typeof schema>;

@@ -7,10 +7,33 @@ import NoteCard from './NoteCard';
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
-  const onOpen = () => setIsOpen(true);
+  const onOpen = () => {
+    setIsOpen(true);
+  };
   const [notes, setNotes] = useState([
-    { id: 1, description: 'This is my default note' },
+    {
+      id: 1,
+      description: 'This is my default note',
+      date: '2/8/2024, 11:28:29 PM',
+      backgroundColor: getRandomColor(),
+    },
+    {
+      id: 2,
+      description: 'This is a test note',
+      date: '2/8/2024, 11:28:29 PM',
+      backgroundColor: getRandomColor(),
+    },
   ]);
+
+  // Background color Generator
+  function getRandomColor() {
+    let color = 'hsl(' + Math.random() * 360 + ', 100%, 75%)';
+    return color;
+  }
+
+  const date = () => {
+    return new Date().toLocaleString();
+  };
 
   return (
     <>
@@ -27,7 +50,15 @@ function App() {
         isOpen={isOpen}
         onClose={onClose}
         onSubmit={note =>
-          setNotes([...notes, { ...note, id: notes.length + 1 }])
+          setNotes([
+            ...notes,
+            {
+              ...note,
+              id: notes.length + 1,
+              date: date(),
+              backgroundColor: getRandomColor(),
+            },
+          ])
         }
       />
     </>
