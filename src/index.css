@@ -69,21 +69,9 @@ button.disabled {
   box-shadow: 0 3px 30px 0 rgba(36, 198, 220, 0.07);
 }
 
-.modal {
-  width: 80%;
-}
 .danger {
   color: red;
 }
-.modal {
-  width: 20%;
-}
-/* .txt {
-  color: white;
-} */
-/* .footer {
-  margin-top: 70px;
-} */
 
 /* Media query */
 @media only screen and (max-width: 767px) {

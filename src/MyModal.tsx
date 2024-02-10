@@ -6,6 +6,7 @@ import {
   ModalBody,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -34,12 +35,35 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
   } = useForm<MyModalData>({
     resolver: zodResolver(schema),
   });
+  // Function to handle modal close
+  const handleCloseModal = () => {
+    onClose(); // Close the modal
+    reset(); // Reset the form
+  };
+
+  // Modal Resize
+  const [modalSize, setModalSize] = React.useState('md');
+
+  React.useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 600) {
+        setModalSize('lg');
+      } else {
+        setModalSize('xs');
+      }
+    }
+
+    handleResize(); // Initial call to set modal size
+    window.addEventListener('resize', handleResize); // Listen for window resize events
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup event listener
+  }, []);
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} size={modalSize}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent className='responsive-modal'>
           <ModalBody>
             <form
               onSubmit={handleSubmit(data => {
@@ -48,7 +72,7 @@ const MyModal = ({ isOpen, onClose, onSubmit }: Props) => {
                 onClose();
               })}
             >
-              <textarea {...register('description')} className='description' />
+              <textarea className='description' {...register('description')} />
               {errors && (
                 <p className='danger'>{errors.description?.message}</p>
               )}
