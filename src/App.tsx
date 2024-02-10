@@ -14,13 +14,13 @@ function App() {
     {
       id: 1,
       description: 'This is my default note',
-      date: '2/8/2024, 11:28:29 PM',
+      date: '2/8/2024, 11:28:29',
       backgroundColor: getRandomColor(),
     },
     {
       id: 2,
       description: 'This is a test note',
-      date: '2/8/2024, 11:28:29 PM',
+      date: '2/8/2024, 11:28:29',
       backgroundColor: getRandomColor(),
     },
   ]);
