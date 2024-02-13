@@ -3,6 +3,7 @@ import './App.css';
 import MyModal from './MyModal';
 import { useState } from 'react';
 import NoteCard from './NoteCard';
+import { AiFillPlusCircle } from 'react-icons/ai';
 
 interface Note {
   id: number;
@@ -35,9 +36,7 @@ function App() {
         <Text fontSize='4xl' fontWeight='bold'>
           Notes
         </Text>
-        <div className='circle' onClick={onOpen}>
-          <p className='plus'>+</p>
-        </div>
+        <AiFillPlusCircle onClick={onOpen} size={25} />
 
         {/* <img src='./src/assets/add_icon.svg' alt='image' onClick={onOpen} /> */}
       </div>
