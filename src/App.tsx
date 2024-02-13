@@ -36,7 +36,7 @@ function App() {
         <Text fontSize='4xl' fontWeight='bold'>
           Notes
         </Text>
-        <AiFillPlusCircle onClick={onOpen} size={25} />
+        <AiFillPlusCircle onClick={onOpen} size={25} cursor='pointer' />
 
         {/* <img src='./src/assets/add_icon.svg' alt='image' onClick={onOpen} /> */}
       </div>
